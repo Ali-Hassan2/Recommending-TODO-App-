@@ -1,9 +1,14 @@
 import React from 'react'
+import Lading from '../../Components/Lading'
+import Navbar from '../../Components/Navbar'
 
-const Home = () => {
+function Home() {
   return (
     <div>
-        Welcome to home g 
+      <>
+        <Navbar />
+        <Lading/>
+      </>
     </div>
   )
 }

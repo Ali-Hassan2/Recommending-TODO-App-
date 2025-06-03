@@ -1,5 +1,5 @@
 const express = require('express');
-const {addinguser,enteruser} = require('../Controller/usercontroller');
+const {addinguser,enteruser,googlelogin} = require('../Controller/usercontroller');
 
 
 const router = express.Router();;
@@ -7,6 +7,8 @@ const router = express.Router();;
 router.post('/creatinguser',addinguser);
 
 router.post('/loginginuser',enteruser)
+
+router.post('/google',googlelogin)
 
 
 module.exports = router
