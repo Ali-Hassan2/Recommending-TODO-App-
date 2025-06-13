@@ -8,8 +8,6 @@ const dotenv = require('dotenv');
 const axios = require('axios')
 dotenv.config();
 
-
-
 const addinguser = async (req, res) => {
 
 
@@ -103,10 +101,12 @@ const enteruser = async (req, res) => {
         const user = result[0];
 
         const payload = {
-            id: user.id,
+            id: user.Id,
             name: user.name,
             username: user.username
         }
+
+
 
         console.log("User found", user);
         console.log("The entered password is: ", enteredPassword.trim());
@@ -122,7 +122,7 @@ const enteruser = async (req, res) => {
         } else {
             console.log("Password matched, you will be logged into the system");
         }
-        const token = jsonwebtoken.sign(payload, process.env.JWTSECRET || "thisissecred", { expiresIn: '1h' });
+        const token = jsonwebtoken.sign(payload, process.env.JWTSECRET || "thisissecred", { expiresIn: '365d' });
 
         return res.status(200).json({
             success: true,

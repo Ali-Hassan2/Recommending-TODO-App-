@@ -5,6 +5,7 @@ const colors = require('colors');
 const morgan = require('morgan');
 const mysqlpool = require('./Config/db');
 const userrouter = require('./Routes/routes')
+const taskrouter = require('./Routes/taskroute')
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 app.use('/todo',userrouter)
+app.use('/todo',taskrouter);
 
 app.get('/', (req, res) => {
     res.status(200).send("Hello g");

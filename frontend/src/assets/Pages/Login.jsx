@@ -51,7 +51,6 @@ function Login() {
       
           if (data.success) {
             setSuccess("Login successful!");
-            console.log("The token is: ",data.token)
             localStorage.setItem('token',data.token);
             localStorage.setItem('user',JSON.stringify(data.user))
             setUser(data.user.name)

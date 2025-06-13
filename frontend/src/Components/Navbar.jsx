@@ -1,62 +1,42 @@
-import  { useState,useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { UserContext } from '../Context/UserContext'
-import { useNavigate } from 'react-router-dom'
-function Navbar() {
-  const navigate =  useNavigate();
-  const { user,setUser } = useContext(UserContext)
-  const handlelogout = async ()=>{
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../Context/UserContext';
+import {Link} from 'react-router-dom'
+
+export function Navbar() {
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
     setUser(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    navigate('/')
-  }
+    navigate('/');
+  };
 
-  const handlelogin = ()=>{
-    navigate('/login')
-  }
+  const handleLogin = () => navigate('/login');
+
   return (
-    <div className="w-full h-[70px] bg-gradient-to-r from-blue-800 to-blue-900 shadow-md text-white flex items-center px-8">
-      
+    <header className="w-full h-[70px] bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white flex items-center px-8 shadow-md">
       <div className="flex-1">
-        <h2 className="text-2xl font-bold tracking-wide">alistodo</h2>
+        <h1 className="text-2xl font-bold tracking-wide">alistodo</h1>
       </div>
-
-      <div className="flex-1 flex justify-center gap-8 text-sm md:text-base font-medium">
-        <Link 
-          to="/home" 
-          className="hover:text-blue-300 transition duration-300"
-        >
-          Home
-        </Link>
-        <Link 
-          to="/aboutus" 
-          className="hover:text-blue-300 transition duration-300"
-        >
-          About Us
-        </Link>
-      </div>
-
-      <div className="flex-1 flex justify-end">
-        <h1 className="text-sm md:text-base font-semibold">
-          {(!user || user.length === 0) ? (
-            "Welcome User"
-          ) : (
-            `Welcome ${user}`
-          )}
-        </h1>
+      <nav className="flex-1 flex justify-center gap-8 text-sm md:text-base">
+        <Link to="/" className="hover:text-gray-300 transition">Home</Link>
+        <Link to="/aboutus" className="hover:text-gray-300 transition">About Us</Link>
+      </nav>
+      <div className="flex-1 flex justify-end items-center gap-4">
+        <span className="text-sm md:text-base font-medium">
+          {(!user || user.length === 0) ? 'Welcome User' : `Welcome ${user}`}
+        </span>
         {user ? (
-          <button onClick={handlelogout } className='font-bold relative left-2 cursor-pointer'>
-            Logout
-          </button>
-        ):(
-          <button onClick={handlelogin} className='font-bold relative left-2 cursor-pointer'>
-            Login
-          </button>
+          <button onClick={handleLogout} className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded">Logout</button>
+        ) : (
+          <button onClick={handleLogin} className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded">Login</button>
         )}
       </div>
-    </div>
-  )
+    </header>
+  );
 }
 
 export default Navbar
